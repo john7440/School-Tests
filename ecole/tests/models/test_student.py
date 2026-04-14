@@ -20,6 +20,10 @@ def test_add_course_should_add_course_to_student(student, course):
     student.add_course(course)
     assert course in student.courses_taken
 
+def test_add_course_should_add_student_to_course(student, course):
+     student.add_course(course)
+     assert student in course.students_taking_it
+
 #------------------test str----------------------
 def test_should_contains_first_name_and_last_name_and_age(student):
     assert "Paul" in str(student)
