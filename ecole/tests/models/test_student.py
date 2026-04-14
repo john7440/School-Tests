@@ -37,4 +37,7 @@ def test_should_contains_first_name_and_last_name_and_age(student):
     assert "Dubois" in str(student)
     assert "12" in str(student)
 
+def test_str_should_match_expected_format_without_address(student):
+    assert str(student) == "Paul Dubois (12 ans), n° étudiant : 1"
+
 
