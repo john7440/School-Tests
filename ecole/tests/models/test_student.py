@@ -5,6 +5,10 @@ import pytest
 from ecole.models.student import Student
 
 #-----------------------les fixtrues--------------------
+@pytest.fixture(autouse=True)
+def reset_student_nbr():
+    Student.students_nb = 0
+
 @pytest.fixture
 def student():
     return Student(first_name="Paul", last_name="Dubois", age=12)
