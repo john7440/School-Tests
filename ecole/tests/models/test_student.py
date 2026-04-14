@@ -24,6 +24,13 @@ def test_add_course_should_add_student_to_course(student, course):
      student.add_course(course)
      assert student in course.students_taking_it
 
+def tes_add_multiple_courses_should_all_be_in_student(student):
+    courses = [MagicMock(), MagicMock(), MagicMock()]
+    for c in courses:
+        c.students_taking_it =[]
+        student.add_course(c)
+    assert len(student.courses_taken) == 3
+
 #------------------test str----------------------
 def test_should_contains_first_name_and_last_name_and_age(student):
     assert "Paul" in str(student)
