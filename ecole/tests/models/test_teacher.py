@@ -35,6 +35,10 @@ def test_add_multiple_courses_should_all_have_teacher_set(teacher,course):
     for c in courses:
         assert c.teacher == teacher
 
+#----------------comportemnet incorrect?-----------
+def test_add_course_should_not_add_course_to_course_teached(teacher,course):
+    teacher.add_course(course)
+    assert course not in teacher.courses_teached
 
 #-----------------------test str---------------------------
 def test_str_should_match_expected_format_without_address(teacher):
