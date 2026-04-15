@@ -4,6 +4,7 @@ import pytest
 
 from ecole.business.school import School
 from ecole.models.course import Course
+from ecole.models.student import Student
 from ecole.models.teacher import Teacher
 
 
@@ -21,6 +22,10 @@ def course():
 @pytest.fixture
 def teacher():
     return MagicMock(spec=Teacher)
+
+@pytest.fixture
+def student():
+    return MagicMock(spec=Student)
 
 #------------------test de add course--------------------------
 def test_add_course_should_add_course_to_list(school, course):
@@ -43,3 +48,14 @@ def test_add_multiple_teachers_should_all_be_in_list(school):
     for t in teachers:
         school.add_teacher(t)
     assert len(school.teachers) == 3
+
+#-------tests de add student------------------------
+def test_add_student_should_add_student_to_list(school,student):
+    school.add_student(student)
+    assert student in school.students
+
+def test_add_multiple_students_should_all_be_in_list(school):
+    students = [MagicMock(spec=Student), MagicMock(spec=Student), MagicMock(spec=Student)]
+    for s in students:
+        school.add_student(s)
+    assert len(school.students) == 3
