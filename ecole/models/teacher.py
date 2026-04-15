@@ -21,6 +21,8 @@ class Teacher(Person):
 
     def add_course(self, course: Course) -> None:
         """Ajout du cours course à la liste des cours qu'il enseigne."""
+        #BUG: course.teacher pointe vers teacher mais teacher.courses_teached reste vide
+        #il faudrait utiliser set_teacher() qui qui gère tout
         course.teacher = self
 
     def __str__(self) -> str:
