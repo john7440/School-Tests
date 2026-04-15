@@ -37,3 +37,9 @@ def test_add_multiple_courses_should_all_be_in_list(school):
 def test_add_teacher_should_add_teacher_to_list(school,teacher):
     school.add_teacher(teacher)
     assert teacher in school.teachers
+
+def test_add_multiple_teachers_should_all_be_in_list(school):
+    teachers = [MagicMock(spec=Teacher), MagicMock(spec=Teacher), MagicMock(spec=Teacher)]
+    for t in teachers:
+        school.add_teacher(t)
+    assert len(school.teachers) == 3
