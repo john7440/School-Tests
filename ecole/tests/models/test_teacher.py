@@ -3,6 +3,8 @@ from unittest.mock import MagicMock
 import pytest
 
 from datetime import date
+
+from ecole.models.course import Course
 from ecole.models.teacher import Teacher
 
 
@@ -39,6 +41,18 @@ def test_add_multiple_courses_should_all_have_teacher_set(teacher,course):
 def test_add_course_should_not_add_course_to_course_teached(teacher,course):
     teacher.add_course(course)
     assert course not in teacher.courses_teached
+
+#-----ajout d'un test qui met en lumière le bug avec un vrai objet Course--------
+#note: j'avais besoin d'avoir un vrai objet course pour que teacher.courses_teached
+##sois modifié puisque le mock ne connais pas teacher
+def test_add_course_should_add_course_to_courses_teached(teacher):
+    course = Course(
+        name="Maths",
+        start_date=date(2023,9,4),
+        end_date=date(2023,9,5)
+    )
+    teacher.add_course(course)
+    assert course in teacher.courses_teached
 
 #-----------------------test str---------------------------
 def test_str_should_match_expected_format_without_address(teacher):
