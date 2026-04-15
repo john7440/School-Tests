@@ -21,3 +21,9 @@ def course():
 def test_add_course_should_add_course_to_list(school, course):
     school.add_course(course)
     assert course in school.courses
+
+def test_add_multiple_courses_should_all_be_in_list(school):
+    courses = [MagicMock(spec=Course), MagicMock(spec=Course), MagicMock(spec=Course)]
+    for c in courses:
+        school.add_course(c)
+    assert len(school.courses) == 3
