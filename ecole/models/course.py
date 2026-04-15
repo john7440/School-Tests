@@ -41,6 +41,9 @@ class Course:
             if self.teacher is not None:
                 # un autre enseignant enseignait précédemment ce cours, qui ne doit
                 # donc plus faire partie de la liste des cours qu'il enseigne
+                #--- NOTE : il y avait un bug ici quand on changeait d'enseignant,
+                # on appelait   "teacher.courses_teached.remove(self)" donc sur le nouveau
+                # au lieu de l'ancien avec self.teacher.courses_teached.remove(self)
                 self.teacher.courses_teached.remove(self)
             # ajout du cours à l'enseignant indiqué
             teacher.courses_teached.append(self)
