@@ -1,4 +1,4 @@
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
 import pytest
 
@@ -59,3 +59,28 @@ def test_add_multiple_students_should_all_be_in_list(school):
     for s in students:
         school.add_student(s)
     assert len(school.students) == 3
+
+#---------test de display courses list -----------------------------
+def test_display_course_should_not_crash_with_empty_list(school):
+    with patch("builtins.print"):
+        school.display_courses_list()
+
+def test_display_courses_list_should_print_each_course(school):
+    """
+    Note: display_courses_list() va lancer 2 print donc on mutliplie par2
+    chaque cours ajoutés, ici 2 * 2 =4
+    """
+    course1 = MagicMock(spec=Course)
+    course1.students_taking_it = []
+    course1.__str__ = lambda self: "Mathématiques (2024-01-01 – 2024-06-30)"
+
+    course2 = MagicMock(spec=Course)
+    course2.students_taking_it = []
+    course2.__str__ = lambda self: "Histoire (2024-01-01 – 2024-06-30)"
+
+    school.add_course(course1)
+    school.add_course(course2)
+
+    with patch("builtins.print") as mock_print:
+        school.display_courses_list()
+        assert mock_print.call_count == 4
