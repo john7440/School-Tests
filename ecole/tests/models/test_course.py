@@ -33,6 +33,16 @@ def test_set_teacher_should_add_course_to_teacher_courses(course,teacher):
     course.set_teacher(teacher)
     assert course in teacher.courses_teached
 
+#mise en lumière du bug sans le self.teacher
+def test_set_teacher_should_remove_course_from_previous_teacher(course, teacher):
+    old_teacher = MagicMock()
+    old_teacher.courses_teached = [course]
+    course.teacher = old_teacher
+
+    course.set_teacher(teacher)
+
+    assert course not in old_teacher.courses_teached
+
 #--------------test de add student------------------
 def test_add_student_should_add_student_to_courses(course, student):
     course.add_student(student)
