@@ -25,14 +25,19 @@ def course():
     return mock
 
 #---------------------text add course------------------------
-def test_add_course_should_set_teacher_on_course(teacher,course):
-    teacher.add_course(course)
-    assert course.teacher == teacher
+def test_add_course_should_set_teacher_on_course(teacher):
+    real_course = Course(
+        name="Mathématiques",
+        start_date=date(2024, 1, 1),
+        end_date=date(2024, 6, 30)
+    )
+    teacher.add_course(real_course)
+    assert real_course.teacher == teacher
 
-def test_add_multiple_courses_should_all_have_teacher_set(teacher,course):
-    courses = [MagicMock(),MagicMock(),MagicMock()]
+def test_add_multiple_courses_should_all_have_teacher_set(teacher):
+    courses = [Course(name=f"Cours {i}", start_date=date(2024, 1, 1), end_date=date(2024, 6, 30))
+        for i in range(3)]
     for c in courses:
-        c.teacher = None
         teacher.add_course(c)
     for c in courses:
         assert c.teacher == teacher
