@@ -23,7 +23,7 @@ class Teacher(Person):
         """Ajout du cours course à la liste des cours qu'il enseigne."""
         #BUG: course.teacher pointe vers teacher mais teacher.courses_teached reste vide
         #il faudrait utiliser set_teacher() qui qui gère tout
-        course.teacher = self
+        course.set_teacher(self)
 
     def __str__(self) -> str:
         person_str = super().__str__()
